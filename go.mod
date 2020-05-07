@@ -1,4 +1,4 @@
-module bbb
+module locatasks
 
 go 1.14
 

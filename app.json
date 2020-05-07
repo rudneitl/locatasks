@@ -1,0 +1,10 @@
+{
+  "name": "LocaTasks",
+  "description": "LocaTasks Gateway",
+  "keywords": [
+    "loca",
+    "go"
+  ],
+  "website": "http://github.com/rudneitl/locatasks",
+  "repository": "http://github.com/rudneitl/locatasks"
+}
