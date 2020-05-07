@@ -18,5 +18,4 @@ ENV HOME /app
 WORKDIR /app
 RUN useradd -m heroku
 USER heroku
-EXPOSE 8080
 CMD /app/bin/locatasks

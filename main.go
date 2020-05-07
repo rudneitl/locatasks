@@ -2,6 +2,8 @@ package main
 
 import (
   "log"
+  "os"
+  "github.com/joho/godotenv"
   "net/http"
   "github.com/gorilla/mux"
 )
@@ -9,7 +11,7 @@ import (
 func get(w http.ResponseWriter, r *http.Request) {
   w.Header().Set("Content-Type", "application/json")
   w.WriteHeader(http.StatusOK)
-  w.Write([]byte(`{"message": "get called"}`))
+  w.Write([]byte(`{"message": "get called -> ` + os.Getenv("REPEAT") + `"}`))
 }
 
 func post(w http.ResponseWriter, r *http.Request) {
@@ -37,6 +39,8 @@ func notFound(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+  godotenv.Load()
+
   r := mux.NewRouter()
   api := r.PathPrefix("/api/v1").Subrouter()
   api.HandleFunc("", get).Methods(http.MethodGet)
@@ -47,5 +51,5 @@ func main() {
 
   api.HandleFunc("/locatask", saveTask).Methods(http.MethodPost)
 
-  log.Fatal(http.ListenAndServe(":8080", r))
+  log.Fatal(http.ListenAndServe(":5000", r))
 }
