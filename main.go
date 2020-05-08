@@ -11,7 +11,7 @@ import (
 func get(w http.ResponseWriter, r *http.Request) {
   w.Header().Set("Content-Type", "application/json")
   w.WriteHeader(http.StatusOK)
-  w.Write([]byte(`{"message": "get called -> ` + os.Getenv("REPEAT") + `"}`))
+  w.Write([]byte(`{"message": "get called"}`))
 }
 
 func post(w http.ResponseWriter, r *http.Request) {
@@ -51,5 +51,5 @@ func main() {
 
   api.HandleFunc("/locatask", saveTask).Methods(http.MethodPost)
 
-  log.Fatal(http.ListenAndServe(":", r))
+  log.Fatal(http.ListenAndServe(":" + os.Getenv("PORT"), r))
 }
