@@ -51,5 +51,5 @@ func main() {
 
   api.HandleFunc("/locatask", saveTask).Methods(http.MethodPost)
 
-  log.Fatal(http.ListenAndServe(":5000", r))
+  log.Fatal(http.ListenAndServe(":", r))
 }
