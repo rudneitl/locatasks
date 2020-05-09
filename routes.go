@@ -2,7 +2,7 @@ package main
 
 import (
   "log"
-  // "os"
+  "os"
   "net/http"
   "encoding/json"
   "golang.org/x/net/context"
@@ -63,7 +63,29 @@ func saveTask(w http.ResponseWriter, r *http.Request) {
   // }
 
   // sa := option.WithCredentials(credentials)
-  sa := option.WithCredentialsFile("private/key/locatasks.json")
+  // sa := option.WithCredentialsFile("private/key/locatasks.json")
+
+  // strjson := `{
+  //   "type": "` + os.Getenv("FIREBASE_TYPE") + `",
+  //   "project_id": "` + os.Getenv("FIREBASE_PROJECT_ID") + `",
+  //   "private_key_id": "` + os.Getenv("FIREBASE_PRIVATE_KEY_ID") + `",
+  //   "private_key": "` + os.Getenv("FIREBASE_PRIVATE_KEY") + `",
+  //   "client_email": "` + os.Getenv("FIREBASE_CLIENT_EMAIL") + `",
+  //   "client_id": "` + os.Getenv("FIREBASE_CLIENT_ID") + `",
+  //   "auth_uri": "` + os.Getenv("FIREBASE_AUTH_URI") + `",
+  //   "token_uri": "` + os.Getenv("FIREBASE_TOKEN_URI") + `",
+  //   "auth_provider_x509_cert_url": "` + os.Getenv("FIREBASE_AUTH_PROVIDER_X509_CERT_URL") + `",
+  //   "client_x509_cert_url": "` + os.Getenv("FIREBASE_CLIENT_X509_CERT_URL") + `"
+  // }`
+
+
+  //myjson := []byte(strjson)
+
+  sa := option.WithCredentialsJSON([]byte(os.Getenv("JSON_CREDS")))
+  //sa := option.WithCredentialsFile("private/key/locatasks.json")
+
+ // log.Println(strjson)
+
   app, err := firebase.NewApp(ctx, nil, sa)
   if err != nil {
     log.Fatalln(err)
