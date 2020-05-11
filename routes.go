@@ -24,6 +24,8 @@ func saveTask(w http.ResponseWriter, r *http.Request) {
 
   ctx := context.Background()
 
+  log.Println(os.Getenv("JSON_CREDS"))
+
   sa := option.WithCredentialsJSON([]byte(os.Getenv("JSON_CREDS")))
   //sa := option.WithCredentialsFile("private/key/locatasks.json")
 
