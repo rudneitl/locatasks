@@ -24,10 +24,7 @@ func saveTask(w http.ResponseWriter, r *http.Request) {
 
   ctx := context.Background()
 
-  log.Println(os.Getenv("JSON_CREDS"))
-
   sa := option.WithCredentialsJSON([]byte(os.Getenv("JSON_CREDS")))
-  //sa := option.WithCredentialsFile("private/key/locatasks.json")
 
   app, err := firebase.NewApp(ctx, nil, sa)
   if err != nil {
@@ -54,4 +51,20 @@ func saveTask(w http.ResponseWriter, r *http.Request) {
   }
 
   defer client.Close()
+
+  w.Header().Set("Content-Type", "application/json")
+  w.WriteHeader(http.StatusOK)
+  w.Write([]byte(`{
+  "username": "Silvio Santos",
+  "text": "Response text",
+  "attachments": [
+    {
+      "title": "Rocket.Chat",
+      "title_link": "https://rocket.chat",
+      "text": "Rocket.Chat, the best open source chat",
+      "image_url": "/images/integration-attachment-example.png",
+      "color": "#764FA5"
+    }
+  ]
+}`))
 }
